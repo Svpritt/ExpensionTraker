@@ -1,0 +1,150 @@
+.total-expense {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .dashboard {
+    margin-right: auto;
+    margin-left: 200PX;
+  }
+  
+  .main-circle-content {
+    text-align: center;
+  }
+  
+  .category-container {
+
+  }
+  
+  .category-grid {
+    display: grid;
+
+  }
+  
+  .category-item {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category-item:nth-child(5) {
+    grid-column: 1;
+  }
+  
+  .category-item:nth-child(6) {
+    grid-column: 4;
+  }
+  
+  .category-item:nth-child(7) {
+    grid-column: 1;
+  }
+  
+  .category-item:nth-child(8) {
+    grid-column: 4;
+  }
+  
+  .big-item {
+    background-color: #ffcccc;
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 2;
+    text-align: center;    
+    border-radius: 50%;
+    position: relative;
+  }
+  .big-item-inside {
+    background-color: aqua;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    flex-direction: column;
+    justify-content: center;
+/* сделал чтобы центры итом совпадали и не пользоваться z-index к тому же в этот элемент я буду выводить контент, а в предыдущий нужен для гридов */
+  }
+  
+  .icon-item {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .percentage {
+    font-size: 14px;
+  }
+  
+  .balance {
+    cursor: pointer;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .expense-button,
+  .income-button,
+  .balance-button {
+    background-color: #7cff9d;
+    color: #282828;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
+  }
+  .income-button {
+    background-color: #57cb70;
+  }
+  .expense-button{
+    background-color: #f26363;
+  }
+
+  /* Создание псевдоэлемента ::before для затемнения фона */
+.expense-button::before,
+.income-button::before,
+.balance-button::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.3); /* Цвет затемнения (черный с прозрачностью) */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0; /* Изначально псевдоэлемент невидимый */
+  pointer-events: none; /* Псевдоэлемент не перехватывает события мыши */
+  transition: opacity 0.2s ease; /* Анимация перехода прозрачности */
+}
+
+/* При наведении на элемент, псевдоэлемент становится видимым (прозрачность 1) */
+.expense-button:hover::before,
+.income-button:hover::before,
+.balance-button:hover::before {
+  opacity: 1;
+}
+
+[unselectable=on] {      /* специальный маркер что бы не было выделений текста в барузере и целом чего угодно внутри элемента, при этом он остается кликабельным */
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

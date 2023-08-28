@@ -1,0 +1,41 @@
+<!-- 
+это мейн окно тут будет главный круговой дашбоард и вокруг него 14 категорий (4-2-2-4)
+(если категорий будет больше то они будут внизу добавляться гридами)
+главный кргу внутри должен будет отрисовывать сколько какая категория занимает места
+под каждой категорией должен будет отображаться % который она занимает в этом месяце (минимум 1%) иначе ничего не отображается 15.64%
+сразу под ними будет див или спан с текущим балансом - это остаток после всех месяцев если нажать на него перекинет на даш борд где Recent Transactions
+сразу под ним две кнопки - расход и доход -->
+<div class="total-expense">
+
+      <!-- Круговой дашборд -->
+      <div class="dashboard">
+        <!-- Главный круг -->
+        <div class="main-circle-content">
+          <h1>{{currentMounth}}</h1>
+          <div class="category-container">
+            <!-- Категории -->
+            <div class="category-grid" >
+              <div class="category-item"  *ngFor="let item of categories;">
+                <p unselectable="on">{{item.name}}</p>
+                <span class="percentage" unselectable="on"  
+                >10%</span>
+            </div>
+            <div class="big-item"><div class="big-item-inside">Reserved Item</div></div>
+          </div>
+          <div class="balance">
+            <button class="balance-button">Текущий баланс: 2500</button>
+          </div>
+          <div class="buttons">
+            <!-- Кнопки расхода и дохода -->
+            <button class="expense-button" (click)="openModal()">Расход</button>
+            <button class="income-button">Доход</button>
+          </div>
+        </div>
+      </div>
+      <app-expenses *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-expenses>
+
+    </div>
+
+
+</div>
+  

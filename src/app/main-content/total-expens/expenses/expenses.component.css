@@ -1,0 +1,67 @@
+.expenses-container {
+    width: 460px;
+    height: 780px;
+    background-color: white;
+    /* border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 200px;
+  }
+  
+  .expenses-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .expenses-header h2 {
+    margin: 0;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .expenses-form {
+    padding: 10px;
+    max-width: 600px;
+    min-width: 300px;
+  }
+  
+  input[type="number"],
+  input[type="text"],
+  select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .add-button,
+  .cancel-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .add-button:hover,
+  .cancel-button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,65 @@
+/* Стили для верхнего меню */
+.top-menu {
+    background-color: #f5f5f5;
+
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 80px;
+  }
+  
+  .menu-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    }
+  
+
+
+  .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    font-family: 'Concert One', cursive;
+
+  }
+  
+  .logo p {
+    font-size: 14px;
+    color: #777;
+    font-family: 'Montserrat', sans-serif;
+
+  }
+  .logo {
+    padding: 0px;
+    margin-right: auto;
+    padding-left: 15px;
+}
+  
+  .totals {
+    text-align: right; /* Выравнивание текста справа */
+    display: flex;
+font-family: 'Montserrat', sans-serif;
+  }
+  
+  .totals p {
+    font-size: 14px;
+    margin: 0 20px; /* Отступ между элементами totals */
+  }
+  
+  .mobile-menu-button {
+    display: none; /* Скрыть кнопку меню по умолчанию */
+  }
+  
+  /* Медиа-запрос для показа кнопки меню в мобильной версии */
+  @media (max-width: 768px) {
+    .totals {
+      display: block; /* Скрыть totals в мобильной версии */
+    }
+  
+    .mobile-menu-button {
+      display: block; /* Показать кнопку меню в мобильной версии */
+    }
+  }
+  

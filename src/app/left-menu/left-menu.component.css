@@ -1,0 +1,63 @@
+/* Для скрытия боковой панели в мобильной версии */
+@media (max-width: 768px) {
+    .left-menu {
+      display: none;
+    }
+    .left-menu.mobile-open {
+      display: block;
+      width: 100%;
+      left: 0;
+      text-align: center;
+    }
+  }
+  
+  /* Для отображения боковой панели в десктопной версии */
+  @media (min-width: 769px) {
+    .left-menu {
+      display: block;
+      /* стили для боковой панели */
+    }
+  }
+  
+  /* Стили для боковой панели меню */
+.left-menu {
+    width: 200px;
+    background-color: #282828;
+    color: white;
+    height: 100%; /* Растягиваем меню по высоте контейнера */
+    position: absolute; /* Фиксируем меню на экране */
+    top: 80px;
+    transition: left 0.3s ease; /* Анимация при открытии/закрытии меню */
+    z-index: 1001;
+  }
+
+  
+  .left-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .left-menu li {
+    padding: 10px 0;
+  }
+  
+  .left-menu a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 5px 15px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .left-menu a:hover {
+    background-color: #444;
+  }
+  
+  /* Стили для активной кнопки (при выборе) */
+  .left-menu a.active {
+    background-color: #555;
+  }
+  
+  .abra {
+    height: 100%;
+  }

@@ -1,0 +1,27 @@
+
+<!-- Более сложный компонент отвечает по сути за то же самое ввод цирфы присвоение ее к общему тоталу со значением минус. 
+этот компонент должен открывать меню где так же есть инпут и кнопка добавить или отменить
+еще инпут description  с ограниченным количеством символов
+но тут еще важно сделать выбор категории куда именно добавить этот расход
+при нажатии на категорию в дашбоарде важно вызвать этот же компонент но с уже переданным значением той или иной категории типа она уже выбрана. -->
+
+<div class="expenses-container">
+    <div class="expenses-header">
+      <h2>Add Expense</h2>
+      <button class="close-button" (click)="closeModal()">X</button>
+    </div>
+    <div class="expenses-form">
+      <!-- Ваша форма для добавления расходов здесь -->
+      <input type="number" [(ngModel)]="sum" placeholder="Sum" />
+      <input type="date" [(ngModel)]="currentDate"/>
+      <input type="text" [(ngModel)]="description" maxlength="30" placeholder="description" />
+      <!-- Выбор категории можно сделать выпадающим списком (select) -->
+      <app-select-category (categorySelected)="handleCategorySelected($event)"></app-select-category>
+
+      <div class="button-container">
+        <button class="cancel-button" (click)="closeModal()">Cancel</button>
+        <button class="add-button" (click)="addExpense()">Add Expense</button>
+    </div>
+    </div>
+  </div>
+  

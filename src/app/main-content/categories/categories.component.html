@@ -1,0 +1,44 @@
+<!-- тут должны отображаться все категории, и категории добавления доходов и категории расхода в двух разных блоках
+в этом компоненте должна быть реализована возможность добалвять и удалять категории, в каждом из блоков (их тут будет два один доходные категории второй расходные)
+при создании любой категории можно будет указать только Икноку, и название
+при нажатии на любую из них откроется компонент для редактирования, где можно будет изменть имея, иконку, или удалять категорию
+в случае удаления должно удаляться все, включая все данные по ней. -->
+
+<!-- это мои категории 
+src/app/services/category.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CategoryService {
+  private categories: Category[] = [
+    {
+      name: "Mortgage / Rent",
+      icon: "path-to-icon",
+      amount: 0,
+      date: 0,
+    }, {
+      name: "Food",
+      icon: "path-to-icon",
+      amount: 0,
+      date: 0,
+        
+    },];
+  getCategories(): Category[] {
+    return this.categories;}
+  addCategory(category: Category): void {
+    this.categories.push(category);}
+  removeCategory(category: Category): void {
+    const index = this.categories.indexOf(category);
+    if (index !== -1) {
+      this.categories.splice(index, 1); } }
+  editCategory(oldCategory: Category, newCategory: Category): void {
+    const index = this.categories.indexOf(oldCategory);
+    if (index !== -1) {
+      this.categories[index] = newCategory;} }}
+export interface Category {
+  name: string;
+  icon: string; // Предположим, что иконка - это строка с путем к иконке
+  amount: number;
+  date: number;} -->

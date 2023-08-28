@@ -1,0 +1,76 @@
+/* categories.component.css */
+.categories-container {
+    overflow-x: auto; /* Разрешаем горизонтальную прокрутку */
+    white-space: nowrap; /* Запрещаем перенос текста */
+    display: flex;
+  }
+  
+  .categories-list {
+    display: flex;
+    gap: 10px;
+    height: 350px;
+    flex-wrap: wrap;
+  }
+  
+  .category-item {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .category-container {
+    overflow: hidden;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    flex-direction: column; /* Меняем направление на вертикальное */
+  align-items: center; /* Выравниваем по центру */
+  }
+  .selected-category-name {
+    margin-bottom: 10px; /* Добавляем отступ снизу */
+  }
+  
+  .category-scroll {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: transform 0.2s ease-in-out;
+    cursor: grab;
+  }
+  
+  .category-scroll:active {
+    cursor: grabbing;
+  }
+  
+  .category-item {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 10px;
+    /* Другие стили для элементов */
+  }
+  
+
+  
+  .selected {
+    /* Стили для выбранного элемента */
+    background-color: #333; /* Пример темного фона */
+    color: #fff; /* Пример белого текста */
+  }
+
+  [unselectable=on] {      /* специальный маркер что бы не было выделений текста в барузере и целом чего угодно внутри элемента, при этом он остается кликабельным */
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

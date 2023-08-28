@@ -1,0 +1,11 @@
+<!-- в обычной версии сайта это меню будет слева и всегда открыто,
+а в мобильной будет кнопка вверху в компоненте топ-меню которая будет делать выпадающим это меню -->
+
+<div class="left-menu" [ngClass]="{'mobile-open': isMobileMenuOpen}">
+    <ul>
+      <li *ngFor="let menuItem of menuItems">
+        <a (click)="navigateTo()">{{ menuItem }}</a>
+      </li>
+    </ul>
+  </div>
+  

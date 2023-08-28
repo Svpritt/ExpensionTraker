@@ -1,0 +1,26 @@
+<!-- это верхнее меню в обычной версии сайта вверху будет название приложение и сегодняшняя дата + тудей тотал инкоме и тотал експрес.
+в мобайл версии будет кнопка меню которая будет открывать компонент left-menu  -->
+
+<div class="top-menu">
+
+    <div class="container">
+      <div class="menu-items">
+
+        <div class="logo">
+          <h1>Tracker</h1>
+          <p>{{ currentDate }}</p>
+        </div>
+        <div class="totals">
+          <p>Today income: +1273</p>
+          <p>Today expense: -998</p>
+        </div>
+        <div class="mobile-menu-button">
+          <button (click)="toggleMobileMenu()">Menu</button>
+        </div>
+      </div>
+    
+
+    </div>
+  </div>
+  
+  
