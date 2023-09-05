@@ -4,14 +4,12 @@
     white-space: nowrap; /* Запрещаем перенос текста */
     display: flex;
   }
-  
   .categories-list {
     display: flex;
     gap: 10px;
     height: 350px;
     flex-wrap: wrap;
   }
-  
   .category-item {
     background-color: #f0f0f0;
     border-radius: 50%;
@@ -34,7 +32,6 @@
   .selected-category-name {
     margin-bottom: 10px; /* Добавляем отступ снизу */
   }
-  
   .category-scroll {
     display: flex;
     flex-direction: column;
@@ -42,24 +39,20 @@
     transition: transform 0.2s ease-in-out;
     cursor: grab;
   }
-  
   .category-scroll:active {
     cursor: grabbing;
   }
-  
   .category-item {
-    background-color: #f0f0f0;
     border-radius: 50%;
     width: 75px;
     height: 75px;
-    margin: 5px 0;
-    cursor: pointer;
-    padding: 10px;
-    /* Другие стили для элементов */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3b27274b;
+    position: relative;
   }
-  
-
-  
   .selected {
     /* Стили для выбранного элемента */
     background-color: #333; /* Пример темного фона */
@@ -73,4 +66,12 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.category-item-img{
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

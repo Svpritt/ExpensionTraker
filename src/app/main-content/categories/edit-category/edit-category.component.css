@@ -1,0 +1,82 @@
+/* modal.component.css */
+.modal {
+    padding: 10px;
+    width: 460px;
+    max-width: 600px;
+    min-width: 300px;
+    height: 780px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+}
+.name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-icon {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    height: 200px;
+    width: 300px;
+    padding: 10px;
+    border: 3px solid #282828;
+    justify-content: center;
+    margin: 10px auto;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  input {
+    height: 30px;
+    width: 200px;
+    background-color: #7cff9d;
+    border: none;
+    padding: 0 10px;
+    display: block;
+    margin: 10px auto; /* Центрируем по горизонтали */
+  }
+  
+  button {
+    background-color: #7cff9d;
+    color: #282828;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  button.delete {
+    background-color: #ff6b6b;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+  }
+  .icon-item {
+    width: 65px;
+    height: 65px;
+    background-color: #3b27274b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .icon-item-img {
+    width: 50px;
+    height: 50px;
+  }
+  .selected {
+    /* Стили для выбранного элемента */
+    background-color: #333; /* Пример темного фона */
+    color: #fff; /* Пример белого текста */
+  }

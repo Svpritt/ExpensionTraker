@@ -1,0 +1,17 @@
+<!-- modal.component.html -->
+<div class="modal">
+   <div class="name"> <h2>Add/Edit/Delete Category</h2><button >Delete</button></div>
+    <input  [(ngModel)]="categoryName" placeholder="Category Name" [value]="name" >
+    <!-- Другие поля и кнопки для выбора иконок и действий -->
+  <div class="select-icon">
+    <div class="icon-item" *ngFor="let icon of icons" (click)="selectIcon(icon)" [ngClass]="{ 'selected': icon === selectedIcon }">
+        <img class="icon-item-img" [src]="getIconPath(icon)" unselectable="on" alt="" >
+      </div>
+  </div>
+    <div class="modal-actions">
+      <button *ngIf="isAddMode" (click)="addCategory()">Add</button>
+      <button *ngIf="!isAddMode" (click)="editCategory()">Edit</button>
+      <button (click)="onCloseModal()">Cancel</button>
+    </div>
+  </div>
+   

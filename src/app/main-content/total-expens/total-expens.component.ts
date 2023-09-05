@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
-import { Category, CategoryService } from 'src/app/services/category.service';
+import { ExpenseCategory, ExpenseCategoryService } from 'src/app/services/expense-category.service';
 
 
 
@@ -15,15 +15,16 @@ export class TotalExpensComponent {
 
   constructor(
     private dateService: DateService,
-    private categoryService: CategoryService
+    private categoryService: ExpenseCategoryService
     ){}
 
-    get categories(): Category[] {
+    get categories(): ExpenseCategory[] {
       return this.categoryService.getCategories();
     }
 
   openModal() {
     this.isModalOpen = true;
+
   }
   closeModal(){
     this.isModalOpen = false;

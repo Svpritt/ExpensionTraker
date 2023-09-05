@@ -14,6 +14,7 @@ import { SelectCategoryComponent } from './main-content/total-expens/expenses/se
 import { MainContentComponent } from './main-content/main-content.component';
 import { CategoriesComponent } from './main-content/categories/categories.component';
 import { MobileMenuService } from './services/mobile-menu.service';
+import { EditCategoryComponent } from './main-content/categories/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MobileMenuService } from './services/mobile-menu.service';
     SelectCategoryComponent,
     MainContentComponent,
     CategoriesComponent,
+    EditCategoryComponent,
     
   ],
   imports: [

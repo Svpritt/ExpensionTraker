@@ -1,0 +1,79 @@
+
+.category-managment {
+    padding: 10px;
+    width: 460px;
+    max-width: 600px;
+    min-width: 300px;
+    height: 780px;
+    margin-left: 200px;
+    position: relative;
+}
+  .categories-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    height: 350px;
+  }
+  .category-item-img{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .name {
+    margin-top: 76px;
+    position: absolute;
+  }
+  .category-item {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3b27274b;
+    position: relative;
+  }
+  .category-container {
+    overflow: hidden;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    flex-direction: column; /* Меняем направление на вертикальное */
+  align-items: center; /* Выравниваем по центру */
+  }
+
+  [unselectable=on] {      /* специальный маркер что бы не было выделений текста в барузере и целом чего угодно внутри элемента, при этом он остается кликабельным */
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.add-category{
+  background-color: #7cff9d;
+  color: #282828;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  position: relative;
+}
+.add-category:disabled {
+  background: #dbdbdb;
+  text-decoration: line-through;
+}
+
+@media (max-width: 768px) {
+  .category-managment{
+    margin: 0;
+  }
+}

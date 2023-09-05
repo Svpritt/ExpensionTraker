@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Category, CategoryService } from 'src/app/services/category.service';
+import { ExpenseCategory, ExpenseCategoryService } from 'src/app/services/expense-category.service';
 
 
 @Component({
@@ -8,17 +8,17 @@ import { Category, CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./select-category.component.css']
 })
 export class SelectCategoryComponent implements OnInit {
-  categories: Category[] = [];
-  selectedCategory: Category | undefined = undefined; // Свойство для хранения выбранной категории
+  categories: ExpenseCategory[] = [];
+  selectedCategory: ExpenseCategory | undefined = undefined; // Свойство для хранения выбранной категории
 
-  @Output() categorySelected = new EventEmitter<Category>();
-  constructor(private categoryService: CategoryService) {}
+  @Output() categorySelected = new EventEmitter<ExpenseCategory>();
+  constructor(private categoryService: ExpenseCategoryService) {}
 
   ngOnInit(): void {
     this.categories = this.categoryService.getCategories();
   }
 
-  selectCategory(category: Category) {
+  selectCategory(category: ExpenseCategory) {
     // Проверяем, выбрана ли уже категория
     if (this.selectedCategory === category) {
       // Если категория уже выбрана, устанавливаем selectedCategory в null

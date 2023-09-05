@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
-import { Category } from 'src/app/services/category.service';
+import { ExpenseCategory } from 'src/app/services/expense-category.service';
+
 
 @Component({
   selector: 'app-expenses',
@@ -11,7 +12,7 @@ export class ExpensesComponent implements OnInit{
   currentDate: string = '';
   description: string = '';
   sum: number | null = null;
-  selectedCategory: Category | undefined; // Добавляем переменную для хранения выбранной категории
+  selectedCategory: ExpenseCategory | undefined; // Добавляем переменную для хранения выбранной категории
   
   constructor(private dateService: DateService){}
 
@@ -28,7 +29,7 @@ export class ExpensesComponent implements OnInit{
     console.log('Дата:', dateValue);
   }
 
-  handleCategorySelected(category: Category) {
+  handleCategorySelected(category: ExpenseCategory) {
     this.selectedCategory = category; // Получаем выбранную категорию от дочернего компонента
   }
   addExpense(){

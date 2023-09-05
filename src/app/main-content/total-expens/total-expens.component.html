@@ -15,8 +15,8 @@
           <div class="category-container">
             <!-- Категории -->
             <div class="category-grid" >
-              <div class="category-item"  *ngFor="let item of categories;">
-                <p unselectable="on">{{item.name}}</p>
+              <div class="category-item" *ngFor="let item of categories;" [title]="item.name">
+                <img class="category-item-img" src={{item.icon}} unselectable="on"alt="">
                 <span class="percentage" unselectable="on"  
                 >10%</span>
             </div>

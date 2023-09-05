@@ -5,10 +5,11 @@
         class="category-item"
         unselectable="on"  
         *ngFor="let category of categories"
+        [title]="category.name"
         (click)="selectCategory(category)"
         [ngClass]="{ 'selected': category === selectedCategory }"
       >
-      {{ category.name }}
+      <img class="category-item-img" src={{category.icon}} unselectable="on"alt="">
     </div>
     </div>
   </div>
