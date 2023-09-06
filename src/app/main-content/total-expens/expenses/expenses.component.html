@@ -16,7 +16,7 @@
       <input type="date" [(ngModel)]="currentDate"/>
       <input type="text" [(ngModel)]="description" maxlength="30" placeholder="description" />
       <!-- Выбор категории можно сделать выпадающим списком (select) -->
-      <app-select-category (categorySelected)="handleCategorySelected($event)"></app-select-category>
+      <app-select-category [categoryType]="categoryType" (categorySelected)="handleCategorySelected($event) "></app-select-category>
 
       <div class="button-container">
         <button class="cancel-button" (click)="closeModal()">Cancel</button>

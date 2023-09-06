@@ -6,14 +6,10 @@
 сразу под ними будет див или спан с текущим балансом - это остаток после всех месяцев если нажать на него перекинет на даш борд где Recent Transactions
 сразу под ним две кнопки - расход и доход -->
 <div class="total-expense">
-
-      <!-- Круговой дашборд -->
       <div class="dashboard">
-        <!-- Главный круг -->
         <div class="main-circle-content">
           <h1>{{currentMounth}}</h1>
           <div class="category-container">
-            <!-- Категории -->
             <div class="category-grid" >
               <div class="category-item" *ngFor="let item of categories;" [title]="item.name">
                 <img class="category-item-img" src={{item.icon}} unselectable="on"alt="">
@@ -27,15 +23,12 @@
           </div>
           <div class="buttons">
             <!-- Кнопки расхода и дохода -->
-            <button class="expense-button" (click)="openModal()">Расход</button>
-            <button class="income-button">Доход</button>
+            <button class="expense-button" (click)="openModal('expense')">Расход</button>
+            <button class="income-button" (click)="openModal('income')">Доход</button>
           </div>
         </div>
       </div>
-      <app-expenses *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-expenses>
-
+      <app-expenses *ngIf="isModalOpen" [categoryType]="categoryType" (closeModalEvent)="closeModal()"></app-expenses>
     </div>
-
-
 </div>
   
