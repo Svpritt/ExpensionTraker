@@ -135,7 +135,11 @@
 .balance-button:hover::before {
   opacity: 1;
 }
-
+.month-switch{
+  text-align: center  ;
+  display: flex;
+  justify-content: space-evenly;
+}
 [unselectable=on] {      /* специальный маркер что бы не было выделений текста в барузере и целом чего угодно внутри элемента, при этом он остается кликабельным */
   -moz-user-select: none;
   -o-user-select: none;

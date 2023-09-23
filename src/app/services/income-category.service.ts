@@ -16,13 +16,11 @@ export class IncomeCategoryService extends CategoryService<IncomeCategory> {
       name: "Cash",
       icon: 'assets/images/iconsSvg/credit-card-regular.svg',
       amount: 0,
-      date: 0,
     },
     {
       name: "Card",
       icon: 'assets/images/iconsSvg/money-bills-solid.svg',
-      amount: 0,
-      date: 0,
+      amount: 3700,
         
     },
   ]
@@ -55,5 +53,4 @@ export interface IncomeCategory {
   name: string;
   icon: string; // Предположим, что иконка - это строка с путем к иконке
   amount: number;
-  date: number;
 }

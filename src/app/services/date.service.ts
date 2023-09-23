@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DateService {
-    getCurrentDateFormatted(format: 'dd.MM.yy' | 'MM.yy' | 'MM' | 'yyyy-MM-dd'): string {
-      const date = new Date();
-      
+    getCurrentDateFormatted(format: 'dd.MM.yy' | 'MM.yy' | 'MM' | 'yyyy-MM-dd', date: Date = new Date()): string {      
       if (format === 'MM') {
         const options1: Intl.DateTimeFormatOptions = { month: 'long' };
         return date.toLocaleDateString('en-US', options1);

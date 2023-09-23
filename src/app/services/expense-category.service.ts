@@ -15,99 +15,72 @@ export class ExpenseCategoryService extends CategoryService<ExpenseCategory> {
       name: "House",
       icon: 'assets/images/iconsSvg/house-chimney-solid.svg',
       amount: 0,
-      date: 0,
     },
     {
       name: "Food",
       icon: 'assets/images/iconsSvg/utensils-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Utilities",
       icon: 'assets/images/iconsSvg/bath-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 1200,        
     },
     {
       name: "Bills",
       icon: 'assets/images/iconsSvg/coins-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Shopping",
       icon: 'assets/images/iconsSvg/basket-shopping-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Transportation",
       icon: 'assets/images/iconsSvg/truck-arrow-right-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Insurance",
       icon: 'assets/images/iconsSvg/building-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Health Care",
       icon: 'assets/images/iconsSvg/hand-holding-heart-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Clothing",
       icon: 'assets/images/iconsSvg/shirt-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Entertainment",
       icon: 'assets/images/iconsSvg/credit-card-regular.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Education",
       icon: 'assets/images/iconsSvg/pen-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Travel",
       icon: 'assets/images/iconsSvg/route-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Gifts",
       icon: 'assets/images/iconsSvg/route-solid.svg',
-      amount: 0,
-      date: 0,
-        
+      amount: 0,        
     },
     {
       name: "Charity",
       icon: 'assets/images/iconsSvg/tree-solid.svg',
-      amount: 0,
-      date: 0,
-        
-    },
+      amount: 0,        
+    }
   ];
 
 
@@ -138,6 +111,5 @@ export interface ExpenseCategory {
   name: string;
   icon: string; // Предположим, что иконка - это строка с путем к иконке
   amount: number;
-  date: number;
 }
 

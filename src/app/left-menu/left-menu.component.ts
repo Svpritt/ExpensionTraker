@@ -21,6 +21,11 @@ export class LeftMenuComponent {
     this.mobileMenuService.isMobileMenuOpen$.subscribe(isOpen => {
       this.isMobileMenuOpen = isOpen;
     });
+    
   }
   navigateTo(){}
+  toggleMobileMenu() {
+    this.mobileMenuService.toggleMobileMenu();
+  }
+  
 }

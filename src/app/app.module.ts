@@ -15,6 +15,10 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { CategoriesComponent } from './main-content/categories/categories.component';
 import { MobileMenuService } from './services/mobile-menu.service';
 import { EditCategoryComponent } from './main-content/categories/edit-category/edit-category.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -31,10 +35,14 @@ import { EditCategoryComponent } from './main-content/categories/edit-category/e
     CategoriesComponent,
     EditCategoryComponent,
     
+    
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule, 
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [MobileMenuService],
   bootstrap: [AppComponent]

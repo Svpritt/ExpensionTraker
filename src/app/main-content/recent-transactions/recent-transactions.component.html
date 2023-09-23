@@ -1,4 +1,36 @@
-
-<!-- тут список типа туду листа, с редактированием, который будет содержать дату, сумму, категорию, метод оплаты,  -->
-
-<p>recent-transactions works!</p>
+<div class="main-container">
+    <div class="dashboard">
+        <div class="month-switch">
+            <button (click)="switchMonth(-1)">Назад</button>             <!--  -->
+            <span> {{ currentMonth }}</span>   <!--   -->
+            <button (click)="switchMonth(1)">Вперед</button> <!-- (click)="switchMonth(1)"-->
+          </div>
+      <div class="find">
+        <input type="text" class="search-input" placeholder="Поиск">
+        <button class="search-button">Поиск</button>
+      </div>
+      <div class="list-container">
+        <div class="list-container">
+            <div class="list-item" *ngFor="let transaction of transactions">
+              <div class="transaction-details">
+                <div class="transaction-title">
+                  {{ transaction.name }}
+                </div>
+                <div class="transaction-date">
+                  {{ transaction.date }}
+                </div>
+              </div>
+              <div class="transaction-description">
+                {{ transaction.description }}
+              </div>
+              <div class="transaction-amount">
+                {{ transaction.summ | number: '1.2-2' }}
+              </div>
+            </div>
+          </div>          
+        <!-- Добавьте дополнительные элементы списка здесь -->
+      </div>
+      
+    
+  </div>
+  

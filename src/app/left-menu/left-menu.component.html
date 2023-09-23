@@ -3,9 +3,9 @@
 
 <div class="left-menu" [ngClass]="{'mobile-open': isMobileMenuOpen}">
     <ul>
-      <li *ngFor="let menuItem of menuItems">
-        <a (click)="navigateTo()">{{ menuItem }}</a>
-      </li>
+      <li><a (click)="toggleMobileMenu()" routerLink="/total-expense">Total Expense</a></li>
+      <li><a (click)="toggleMobileMenu()" routerLink="/categories">Categories</a></li>
+      <li><a (click)="toggleMobileMenu()" routerLink="/recent-transactions">Categories</a></li>
     </ul>
   </div>
   

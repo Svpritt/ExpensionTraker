@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/
 import { icons } from 'src/app/services/iconsData'; // Импортируйте список иконок
 import {ExpenseCategory, ExpenseCategoryService} from 'src/app/services/expense-category.service'; // Импортируйте сервис
 import { IncomeCategory, IncomeCategoryService } from 'src/app/services/income-category.service';
+import { GoNestService } from 'src/app/services/go-nest.service';
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
@@ -72,7 +73,7 @@ export class EditCategoryComponent implements AfterViewInit  {
   onCloseModal() {
     this.closeModal.emit();
   }
-  constructor(private ExpenseCategoryService: ExpenseCategoryService, private IncomeCategoryService: IncomeCategoryService) {} // Внедрение сервиса в конструктор
+  constructor(private goNestService: GoNestService) {} // Внедрение сервиса в конструктор
   getIconPath(icon: string): string {
     return `assets/images/iconsSvg/${icon}`;
   }
@@ -87,16 +88,55 @@ export class EditCategoryComponent implements AfterViewInit  {
       console.log(this.selectedIcon)
     }
   }
-  addCategory(): void {
+  addCategoryS(): void {
     if (this.categoryName && this.selectedIcon) {
       const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
+      let type = '';
+      if (this.selectedCategoryService instanceof IncomeCategoryService) {
+        type = 'income';
+      } else {
+        type = 'expense';
+      }
       const newCategory = {
         name: this.categoryName,
         icon: iconPath,
         amount: 0, // Пример значения по умолчанию
-        date: 0,   // Пример значения по умолчанию
+        type: type // Добавляем тип категории
       };
+      this.goNestService.createCategory(newCategory).subscribe(
+        (response) => {
+          // Обработка успешного ответа от сервера
+          console.log('Категория успешно создана:', response);
+          // Сбросить значения после добавления
+          this.categoryName = '';
+          this.selectedIcon = '';
+          this.onCloseModal();
+        },
+        (error) => {
+          // Обработка ошибки
+          console.error('Ошибка при создании категории:', error);
+        }
+      );
+    }
+  }
+  addCategory(): void {
+    if (this.categoryName && this.selectedIcon) {
+      const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
+      let type = '';
+      const newCategory = {
+        name: this.categoryName,
+        icon: iconPath,
+        amount: 0, // Пример значения по умолчанию
+      };
+      if (this.selectedCategoryService instanceof IncomeCategoryService) {
+        type = 'income'
+      } else { type = 'expense'}
       this.selectedCategoryService.addCategory(newCategory)
+      console.log(newCategory)
+      console.log(this.selectedCategoryService)
+      console.log(type) //ее передадим как 4 тип данных в NewCategory для нормального апи настрйоки контроллера и сортировок данных
+      //эта вводная позволит снизить количество хранимых таблиц данных
+
       // Сбросить значения после добавления
       this.categoryName = '';
       this.selectedIcon = '';
@@ -106,17 +146,23 @@ export class EditCategoryComponent implements AfterViewInit  {
   editCategory(): void {
     console.log(this.categoryName, this.selectedIcon)
     console.log(this.categories)
-
     const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
+    let type = '';
     const newCategory = {
       name: this.categoryName,
       icon: iconPath,
       amount: this.selectedCategory?.amount, // Пример значения по умолчанию
-      date: this.selectedCategory?.date,   // Пример значения по умолчанию
     };
+    if (this.selectedCategoryService instanceof IncomeCategoryService) {
+      type = 'income'
+    } else { type = 'expense'}
+    console.log(type)
     this.selectedCategoryService.editCategory(this.selectedCategory, newCategory)
     this.categoryName = '';
     this.selectedIcon = '';
+    console.log(newCategory)
+    console.log(this.selectedCategoryService)
+
     this.onCloseModal();
   }
 }
