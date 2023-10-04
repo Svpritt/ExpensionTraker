@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { ExpenseCategory, ExpenseCategoryService} from 'src/app/services/expense-category.service';
-import { IncomeCategoryService, IncomeCategory } from 'src/app/services/income-category.service';
+import { ExpenseCategoryService} from 'src/app/services/expense-category.service';
+import { IncomeCategoryService } from 'src/app/services/income-category.service';
+import { Category } from 'src/app/Backend/backend-module/services/category.service'
+import { Observable } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-categories',
@@ -9,20 +14,29 @@ import { IncomeCategoryService, IncomeCategory } from 'src/app/services/income-c
 })
 export class CategoriesComponent {
   selectedCategoryService: any;
-  selectedCategory!: ExpenseCategory | IncomeCategory; //указываю что если будет выполнен код который требует селектед категори то это переменная всегда будет заполнена
+  selectedCategory!: Category ; //указываю что если будет выполнен код который требует селектед категори то это переменная всегда будет заполнена
   selectedCategoryType: 'expense' | 'income' | null = null;
   categoryName: string = '';
   selectedIcon: string = '';
   name: string = ''; 
   icon: string = ''; 
   isAddMode: boolean = false; // це змінна типу флажок щоб розуміти що нажав користувач категорію чи кнопку добавити
-  currentCategory!: ExpenseCategory | IncomeCategory;
+  currentCategory!: Category ;
+  expenseCategories: Category[] = [];
+  incomeCategories: Category[] = [];
   constructor(private expenseCategoryService: ExpenseCategoryService, private incomeCategoryService: IncomeCategoryService) { }
-    get categories(): ExpenseCategory[] {
-      return this.expenseCategoryService.getCategories();
+  
+    ngOnInit() {
+      this.loadCategories();
     }
-    get incomeCategories(): IncomeCategory[]  {
-      return this.incomeCategoryService.getCategories();
+    private loadCategories() {
+      this.expenseCategoryService.getCategories().subscribe((categories: Category[]) => {
+        this.expenseCategories = categories;
+      });
+    
+      this.incomeCategoryService.getCategories().subscribe((categories: Category[]) => {
+        this.incomeCategories = categories;
+      });
     }
     isModalOpen = false; // Переменная для управления видимостью модального окна
     // Метод для открытия модального окна
@@ -48,7 +62,7 @@ export class CategoriesComponent {
     this.selectedCategory = undefined!; // поскольку до компиляции у меня всегда может быть 2 типа данных expense income
     // а после компиляции без вызова кода стандартное значение это undefind то и при сбросе я принудительно ставлю его же
   }
-  selectCategory(category: ExpenseCategory | IncomeCategory, categoryType: 'expense' | 'income'): void {
+  selectCategory(category: Category , categoryType: 'expense' | 'income'): void {
     this.selectedCategory = category;
     this.selectedCategoryType = categoryType;
     this.name = this.selectedCategory.name;

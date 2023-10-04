@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { icons } from 'src/app/services/iconsData'; // Импортируйте список иконок
-import {ExpenseCategory, ExpenseCategoryService} from 'src/app/services/expense-category.service'; // Импортируйте сервис
-import { IncomeCategory, IncomeCategoryService } from 'src/app/services/income-category.service';
-import { GoNestService } from 'src/app/services/go-nest.service';
+import { ExpenseCategoryService} from 'src/app/services/expense-category.service'; // Импортируйте сервис
+import {  IncomeCategoryService } from 'src/app/services/income-category.service';
+import { Category, CategoryService } from 'src/app/Backend/backend-module/services/category.service';
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
@@ -14,14 +14,13 @@ export class EditCategoryComponent implements AfterViewInit  {
   categoryName: string = ''; // Переменная для хранения введенного имени категории
   @Output() closeModal = new EventEmitter<void>();
   @Output() saveCategory = new EventEmitter<any>();
-  @Input()
-  selectedCategoryService!: ExpenseCategoryService | IncomeCategoryService;
+  @Input() selectedCategoryService!: ExpenseCategoryService | IncomeCategoryService;
   @Input() name!: string;
   @Input() icon!: string;
   @Input() isAddMode: boolean = false;
   @Input() isEditMode: boolean = false;
-  @Input() categories: ExpenseCategory[] | IncomeCategory[] | undefined;
-  @Input() selectedCategory!: ExpenseCategory | IncomeCategory;
+  @Input() categories: Category[] | undefined;
+  @Input() selectedCategory!: Category ;
 
   ngOnInit() {
     if (this.name !== '') {
@@ -73,7 +72,7 @@ export class EditCategoryComponent implements AfterViewInit  {
   onCloseModal() {
     this.closeModal.emit();
   }
-  constructor(private goNestService: GoNestService) {} // Внедрение сервиса в конструктор
+  constructor(private categoryService: CategoryService) {} // Внедрение сервиса в конструктор
   getIconPath(icon: string): string {
     return `assets/images/iconsSvg/${icon}`;
   }
@@ -103,7 +102,7 @@ export class EditCategoryComponent implements AfterViewInit  {
         amount: 0, // Пример значения по умолчанию
         type: type // Добавляем тип категории
       };
-      this.goNestService.createCategory(newCategory).subscribe(
+      this.categoryService.createCategory(newCategory).subscribe(
         (response) => {
           // Обработка успешного ответа от сервера
           console.log('Категория успешно создана:', response);
@@ -119,50 +118,95 @@ export class EditCategoryComponent implements AfterViewInit  {
       );
     }
   }
-  addCategory(): void {
-    if (this.categoryName && this.selectedIcon) {
-      const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
-      let type = '';
-      const newCategory = {
-        name: this.categoryName,
-        icon: iconPath,
-        amount: 0, // Пример значения по умолчанию
-      };
-      if (this.selectedCategoryService instanceof IncomeCategoryService) {
-        type = 'income'
-      } else { type = 'expense'}
-      this.selectedCategoryService.addCategory(newCategory)
-      console.log(newCategory)
-      console.log(this.selectedCategoryService)
-      console.log(type) //ее передадим как 4 тип данных в NewCategory для нормального апи настрйоки контроллера и сортировок данных
-      //эта вводная позволит снизить количество хранимых таблиц данных
-
-      // Сбросить значения после добавления
-      this.categoryName = '';
-      this.selectedIcon = '';
-      this.onCloseModal();
-    }
-  }
-  editCategory(): void {
-    console.log(this.categoryName, this.selectedIcon)
-    console.log(this.categories)
+editCategory():void{
+  if (this.categoryName && this.selectedIcon && this.selectedCategory.id) {
     const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
-    let type = '';
-    const newCategory = {
+    const newCategoryData = {
       name: this.categoryName,
       icon: iconPath,
-      amount: this.selectedCategory?.amount, // Пример значения по умолчанию
+      amount: this.selectedCategory.amount,
     };
-    if (this.selectedCategoryService instanceof IncomeCategoryService) {
-      type = 'income'
-    } else { type = 'expense'}
-    console.log(type)
-    this.selectedCategoryService.editCategory(this.selectedCategory, newCategory)
-    this.categoryName = '';
-    this.selectedIcon = '';
-    console.log(newCategory)
-    console.log(this.selectedCategoryService)
-
-    this.onCloseModal();
+    this.categoryService.updateCategory(this.selectedCategory.id, newCategoryData).subscribe(
+      (response) => {
+        // Обработка успешного ответа от сервера
+        console.log('Категория успешно обновлена:', response);
+        // Сбросить значения после редактирования
+        this.categoryName = '';
+        this.selectedIcon = '';
+        this.selectedCategory = undefined!;
+        this.onCloseModal();
+      },
+      (error) => {
+        // Обработка ошибки
+        console.error('Ошибка при обновлении категории:', error);
+      }
+    );
   }
+
+
+  // есть идея сделать едит по айди, при создании транзакции ей передавать так же categoryId и в случае изменения имени или иконки у категории 
+  //у нее останется то же айди что и было. и все транзакции останутся с тем же айди что и было.
+  //будет вопрос только в компонентах где список транзакций, придется по айди определять к какой категории относится та или иная транзакция и делать вывод.
+  //придется чуть изменить ВСЕ и сразу, но зато потом будет пушка.
+  //основные плюсы - легко редактировать, легко сопоставлять, нет необходимости в уникальном имени, можно будет так же редактировать саму транзакцию,
+  //и перевыбрать ей категорию по айди.
+
+  //сделать категорию (другое) у которой вместо id будет что-то типа undefind присваивать ей все транзакции айди категорий которых не найдено
+  //таким образом при удалении категории общий баланс системы не будет меняться (за весь период)
 }
+
+}  
+
+
+
+// editCategory(): void {
+//   if (this.categoryName && this.selectedIcon && this.selectedCategory) {
+//     const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
+//     const newCategoryData = {
+//       name: this.categoryName,
+//       icon: iconPath,
+//       amount: this.selectedCategory.amount,
+//     };
+//     const categoryId = this.selectedCategory.id; // Получаем ID выбранной категории
+
+//     this.categoryService.updateCategory(categoryId, newCategoryData).subscribe(
+//       (response) => {
+//         // Обработка успешного ответа от сервера
+//         console.log('Категория успешно обновлена:', response);
+//         // Сбросить значения после редактирования
+//         this.categoryName = '';
+//         this.selectedIcon = '';
+//         this.selectedCategory = undefined;
+//         this.onCloseModal();
+//       },
+//       (error) => {
+//         // Обработка ошибки
+//         console.error('Ошибка при обновлении категории:', error);
+//       }
+//     );
+//   }
+// }
+
+//   editCategory(): void {
+//     console.log(this.categoryName, this.selectedIcon)
+//     console.log(this.categories)
+//     const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
+//     let type = '';
+//     const newCategory = {
+//       name: this.categoryName,
+//       icon: iconPath,
+//       amount: this.selectedCategory?.amount, // Пример значения по умолчанию
+//     };
+//     if (this.selectedCategoryService instanceof IncomeCategoryService) {
+//       type = 'income'
+//     } else { type = 'expense'}
+//     console.log(type)
+//     this.selectedCategoryService.editCategory(this.selectedCategory, newCategory)
+//     this.categoryName = '';
+//     this.selectedIcon = '';
+//     console.log(newCategory)
+//     console.log(this.selectedCategoryService)
+
+//     this.onCloseModal();
+//   }
+// }

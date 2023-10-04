@@ -9,7 +9,7 @@
     <h2>Expens categories <button class="add-category" (click)="openAddCategory('expense')">add</button>
 </h2>
     <div class="categories-list" >
-      <div class="category-item"  *ngFor="let item of categories;" [title]="item.name" (click)="selectCategory(item, 'expense')">
+      <div class="category-item" *ngFor="let item of expenseCategories;" [title]="item.name" (click)="selectCategory(item, 'expense')">
         <img class="category-item-img" src={{item.icon}} unselectable="on"alt="">
         <span class="name" unselectable="on">{{item.name}}</span>
       </div>
@@ -30,11 +30,11 @@
   [name]="name"
   [icon]="icon"
   [isAddMode]="isAddMode"
-  [categories]="categories"
+  [categories]="expenseCategories"
   [selectedCategory]="selectedCategory"
 ></app-edit-category>
 
-</div>
+</div> 
 
     <!-- нг иф - проверяет булиан свойство и если тру рендерит обьект
     клосеМодал - функция из родительского компонента, закрывает это окно передается сюда чтоб дальше работать в ТС

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GoNestService } from 'src/app/services/go-nest.service';
+import { TransactionsService } from 'src/app/Backend/backend-module/services/transactions.service';
 
 @Component({
   selector: 'app-recent-transactions',
@@ -12,7 +12,7 @@ export class RecentTransactionsComponent implements OnInit {
   currentDate: Date = new Date(); // Инициализируйте текущую дату значением по умолчанию
 
   constructor(
-    private goNestService: GoNestService
+    private transactionsService: TransactionsService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class RecentTransactionsComponent implements OnInit {
     const year = this.currentDate.getFullYear();
     const month = this.currentDate.getMonth() + 1; // Добавляем 1, так как месяцы начинаются с 0
   
-    this.goNestService.getTransactionsForMonth(year, month).subscribe((data) => {
+    this.transactionsService.getTransactionsForMonth(year, month).subscribe((data) => {
       this.transactions = data;
       this.currentMonth = this.getCurrentMonthFormatted();
     });

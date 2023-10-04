@@ -5,7 +5,7 @@
 но тут еще важно сделать выбор категории куда именно добавить этот расход
 при нажатии на категорию в дашбоарде важно вызвать этот же компонент но с уже переданным значением той или иной категории типа она уже выбрана. -->
 
-<div class="expenses-container">
+<div class="expenses-container" >
     <div class="expenses-header">
       <h2>Add Expense</h2>
       <button class="close-button" (click)="closeModal()">X</button>
@@ -14,9 +14,11 @@
       <!-- Ваша форма для добавления расходов здесь -->
       <input type="number" [(ngModel)]="sum" placeholder="Sum" />
       <input type="date" [(ngModel)]="currentDate"/>
-      <input type="text" [(ngModel)]="description" maxlength="30" placeholder="description" />
+      <input type="text" [(ngModel)]="description" maxlength="30" placeholder="description"
+      
+      />
       <!-- Выбор категории можно сделать выпадающим списком (select) -->
-      <app-select-category [categoryType]="categoryType" (categorySelected)="handleCategorySelected($event) "></app-select-category>
+      <app-select-category [categoryType]="categoryType" (categorySelected)="handleCategorySelected($event)"></app-select-category>
 
       <div class="button-container">
         <button class="cancel-button" (click)="closeModal()">Cancel</button>
@@ -25,3 +27,5 @@
     </div>
   </div>
   
+
+  <!-- (categorySelected)="handleCategorySelected($event)  -->

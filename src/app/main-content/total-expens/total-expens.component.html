@@ -4,13 +4,14 @@
         <div class="main-circle-content">
           <div class="month-switch">
             <button (click)="switchMonth(-1)">Назад</button>             <!--  -->
-            <span> {{ currentMonth }}</span>   <!--   -->
+            <span> {{ currentMounth }}</span>   <!--   -->
             <button (click)="switchMonth(1)">Вперед</button> <!-- (click)="switchMonth(1)"-->
-          </div>          <div class="category-container">
+          </div>
+          <div class="category-container">
             <div class="category-grid" >
-              <div class="category-item" *ngFor="let item of categories;" [title]="item.amount">
+              <div class="category-item" *ngFor="let item of expenseCategories;" [title]="item.amount">
                 <img class="category-item-img" src={{item.icon}} unselectable="on"alt="">
-                <span class="percentage" unselectable="on">{{ totalAmountService.getCategoryPercent(item).toFixed(1) }}%</span>
+                <span class="percentage" unselectable="on"> {{ item.amount }}</span>
             </div>
             <div class="big-item"><div class="big-item-inside">Reserved Item</div></div>
           </div>
@@ -24,7 +25,7 @@
           </div>
         </div>
       </div>
-      <app-expenses *ngIf="isModalOpen" [categoryType]="categoryType" (closeModalEvent)="closeModal()"></app-expenses>
+      <app-expenses *ngIf="isModalOpen" [categoryType]="categoryType" (closeModalEvent)="closeModal()" [parentComponent]="this"></app-expenses>
     </div>
-</div>
-  
+<!-- [parentComponent]="this" -->
+<!-- ((item.amount / totalAmount) * 100).toFixed(2) -->
