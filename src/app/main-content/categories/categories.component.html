@@ -5,8 +5,18 @@
 в случае удаления должно удаляться все, включая все данные по ней. -->
 
   <div class="category-managment">
+    <app-edit-category
+    *ngIf="isEditCategoryOpen"
+    (closeModal)="closeEditCategory()"
+    [selectedCategoryService]="selectedCategoryService"
+    [name]="name"
+    [icon]="icon"
+    [isAddMode]="isAddMode"
+    [categories]="expenseCategories"
+    [selectedCategory]="selectedCategory"
+  ></app-edit-category>
     <h1 style="text-align: center;">Category Managment</h1>
-    <h2>Expens categories <button class="add-category" (click)="openAddCategory('expense')">add</button>
+    <h2>Expens categories <button class="add-category" (click)="openAddCategory('expense')">Add New</button>
 </h2>
     <div class="categories-list" >
       <div class="category-item" *ngFor="let item of expenseCategories;" [title]="item.name" (click)="selectCategory(item, 'expense')">
@@ -15,7 +25,7 @@
       </div>
       
   </div>
-  <h2>Income categories <button class="add-category" (click)="openAddCategory('income'); ">add</button>
+  <h2>Income categories <button class="add-category" (click)="openAddCategory('income'); ">Add New</button>
 </h2>
   <div class="categories-list" >
       <div class="category-item"  *ngFor="let item of incomeCategories;" [title]="item.name" (click)="selectCategory(item, 'income')">
@@ -23,16 +33,7 @@
         <span class="name" unselectable="on">{{item.name}}</span>
       </div>
   </div>
-  <app-edit-category
-  *ngIf="isEditCategoryOpen"
-  (closeModal)="closeEditCategory()"
-  [selectedCategoryService]="selectedCategoryService"
-  [name]="name"
-  [icon]="icon"
-  [isAddMode]="isAddMode"
-  [categories]="expenseCategories"
-  [selectedCategory]="selectedCategory"
-></app-edit-category>
+ 
 
 </div> 
 

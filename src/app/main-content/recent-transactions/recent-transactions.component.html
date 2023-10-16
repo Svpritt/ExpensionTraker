@@ -1,9 +1,9 @@
 <div class="main-container">
     <div class="dashboard">
         <div class="month-switch">
-            <button (click)="switchMonth(-1)">Назад</button>             <!--  -->
+            <button (click)="switchMonth(-1)">Before</button>             <!--  -->
             <span> {{ currentMonth }}</span>   <!--   -->
-            <button (click)="switchMonth(1)">Вперед</button> <!-- (click)="switchMonth(1)"-->
+            <button (click)="switchMonth(1)">Next</button> <!-- (click)="switchMonth(1)"-->
           </div>
       <div class="find">
         <input type="text" class="search-input" placeholder="Поиск">
@@ -11,26 +11,63 @@
       </div>
       <div class="list-container">
         <div class="list-container">
-            <div class="list-item" *ngFor="let transaction of transactions">
-              <div class="transaction-details">
-                <div class="transaction-title">
-                  {{ transaction.name }}
-                </div>
-                <div class="transaction-date">
-                  {{ transaction.date }}
-                </div>
+          <div class="list-item" *ngFor="let transaction of transactions">
+            <div class="transaction-details" *ngIf="!transaction.isEditing">
+
+              <div class="transaction-title" *ngIf="!transaction.isEditing">
+                {{ transaction.name }}
               </div>
-              <div class="transaction-description">
-                {{ transaction.description }}
-              </div>
-              <div class="transaction-amount">
-                {{ transaction.summ | number: '1.2-2' }}
+              <div class="transaction-date" *ngIf="!transaction.isEditing">
+                {{ transaction.date }}
               </div>
             </div>
-          </div>          
-        <!-- Добавьте дополнительные элементы списка здесь -->
+            <div class="transaction-description" *ngIf="!transaction.isEditing">
+              {{ transaction.description }}
+            </div>
+            <!-- + ' ' + transaction.categoryType  -->
+            <div class="transaction-amount" *ngIf="!transaction.isEditing"
+            [class.Red]="transaction.categoryType === 'expense'"
+            [class.Green]="transaction.categoryType !== 'expense'">
+              {{ transaction.summ | number: '1.2-2' }}
+            </div>
+            
+            <div class="edit-group" *ngIf="transaction.isEditing">
+              <div class="group-one">
+                <div *ngIf="transaction.isEditing">
+                  <input type="text" class="transaction-title-edit" [(ngModel)]="transaction.editedName" placeholder="Name">
+                </div>
+                <div *ngIf="transaction.isEditing">
+                  <input type="date" class="transaction-date-edit" [(ngModel)]="transaction.editedDate" placeholder="date">
+                </div>
+              </div>
+              <div *ngIf="transaction.isEditing" style="height: auto; width: 100%; text-align: center;">
+                <input type="text" class="transaction-description-edit" [(ngModel)]="transaction.editedDescription" placeholder="description" style="width: 90%;  word-break: break-word; height: auto;">
+              </div>
+              <div class="group-two">
+              
+                <div *ngIf="transaction.isEditing">
+                  <input type="text" class="transaction-amount-edit" [(ngModel)]="transaction.editedSumm" placeholder="number">
+                </div>
+              </div>
+               
+            </div>
+            
+
+            <div class="transaction-actions">
+              <ng-container *ngIf="!transaction.isEditing; else editButtons">
+                <button (click)="editTransaction(transaction)">Edit</button>
+                <button (click)="deleteTransaction(transaction)">Delete</button>
+              </ng-container>
+              <ng-template #editButtons>
+                <button (click)="saveChanges(transaction)">Save</button>
+                <button (click)="cancelEdit(transaction)">Cancel</button>
+              </ng-template>
+            </div>
+          </div>
+          
+           
+        </div>
+       </div>          
       </div>
-      
-    
   </div>
   

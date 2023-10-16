@@ -1,35 +1,28 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
-import { ExpenseCategoryService } from 'src/app/services/expense-category.service';
-import { IncomeCategoryService } from 'src/app/services/income-category.service';
-import { GoNestService } from 'src/app/services/go-nest.service';
 import { Category, CategoryService } from 'src/app/Backend/backend-module/services/category.service';
 import { TotalExpensComponent } from '../total-expens.component';
 import { TransactionsService } from 'src/app/Backend/backend-module/services/transactions.service';
+import { ModalExpenseService } from 'src/app/services/modal-expense.service'; // Импортируйте сервис для модального окна
 
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.component.html',
   styleUrls: ['./expenses.component.css']
 })
-export class ExpensesComponent implements OnInit{
-  [x: string]: any;
+export class ExpensesComponent implements OnInit {
   private currentIndex = 0;
   private data = [];
   currentDate: string = '';
   description: string = '';
   sum: number | null = null;
-  selectedCategory: Category | undefined; // Добавляем переменную для хранения выбранной категории
-  selectedCategoryService!: ExpenseCategoryService | IncomeCategoryService;
-  @Input() categoryType: 'expense' | 'income' | undefined; // Входное свойство для получения categoryType из родительского компонента
-  @Input()
-  parentComponent!: TotalExpensComponent;
-  
+  selectedCategory: Category | undefined;
+  @Input() categoryType: 'expense' | 'income' | undefined;
+  @Input() totalExpens!: TotalExpensComponent;
+
   constructor(private dateService: DateService,
-    private expenseCategoryService: ExpenseCategoryService,
-    private incomeCategoryService: IncomeCategoryService,
-    private CategoryService: CategoryService,
-    private TransactionService: TransactionsService
+    private TransactionService: TransactionsService,
+    private ModalExpenseService: ModalExpenseService // Внедрите сервис модального окна
     ){
       fetch('/assets/transactions.json')
       .then((response) => response.json())
@@ -38,11 +31,7 @@ export class ExpensesComponent implements OnInit{
         // this.startUploadingData(); загрузка сгенерированных данных
       });
     }
-
-  @Output() closeModalEvent = new EventEmitter<void>();
-  closeModal() {
-    this.closeModalEvent.emit();
-  }
+  
   ngOnInit(): void {
     this.currentDate = this.dateService.getCurrentDateFormatted('yyyy-MM-dd'); // Получаем сегодняшнюю дату в формате YYYY-MM-DD
   }
@@ -68,7 +57,7 @@ export class ExpensesComponent implements OnInit{
       };
       this.TransactionService.createTransaction(data).subscribe({
         next: () => {
-          this.parentComponent.onDataUpdated();
+          this.totalExpens.onDataUpdated();
           console.log('дата успішно відправленно');
         },
         error: () => {
@@ -81,14 +70,21 @@ export class ExpensesComponent implements OnInit{
       console.log('Дата:', this.currentDate);
       console.log('Описание:', this.description);
       console.log(this.categoryType);
-      this.closeModal();
+      this.ModalExpenseService.closeModal();
     } else {
       return;
     }
-  }  
- 
-
+  } 
+  closeModal() {
+    console.log('Закрытие модального окна');
+    this.ModalExpenseService.closeModal();
+  }
 }
+
+// @Output() closeModalEvent = new EventEmitter<void>();
+//   closeModal() {
+//     this.closeModalEvent.emit();
+//   }
 
   // // Создаем объект Date
   //     // Важно: месяцы в объекте Date начинаются с 0, поэтому вычитаем 1 из месяца

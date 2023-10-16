@@ -87,6 +87,21 @@ export class EditCategoryComponent implements AfterViewInit  {
       console.log(this.selectedIcon)
     }
   }
+  deleteThisCategory(): void {
+    if (this.selectedCategory && this.selectedCategory.id) {
+      this.categoryService.deleteCategory(this.selectedCategory.id).subscribe(
+        () => {
+          console.log(`Категория с id ${this.selectedCategory.id} успешно удалена`);
+          // Дополнительные действия после удаления, например, закрытие модального окна
+          this.onCloseModal();
+        },
+        (error) => {
+          console.error(`Ошибка при удалении категории с id ${this.selectedCategory.id}:`, error);
+        }
+      );
+    }
+  }
+  
   addCategoryS(): void {
     if (this.categoryName && this.selectedIcon) {
       const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
@@ -118,6 +133,7 @@ export class EditCategoryComponent implements AfterViewInit  {
       );
     }
   }
+  
 editCategory():void{
   if (this.categoryName && this.selectedIcon && this.selectedCategory.id) {
     const iconPath = `assets/images/iconsSvg/${this.selectedIcon}`;
@@ -142,7 +158,7 @@ editCategory():void{
       }
     );
   }
-
+}
 
   // есть идея сделать едит по айди, при создании транзакции ей передавать так же categoryId и в случае изменения имени или иконки у категории 
   //у нее останется то же айди что и было. и все транзакции останутся с тем же айди что и было.
@@ -153,7 +169,7 @@ editCategory():void{
 
   //сделать категорию (другое) у которой вместо id будет что-то типа undefind присваивать ей все транзакции айди категорий которых не найдено
   //таким образом при удалении категории общий баланс системы не будет меняться (за весь период)
-}
+
 
 }  
 

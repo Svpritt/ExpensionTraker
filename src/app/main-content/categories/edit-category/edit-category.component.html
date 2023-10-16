@@ -1,6 +1,10 @@
 <!-- modal.component.html -->
 <div class="modal">
-   <div class="name"> <h2>Add/Edit/Delete Category</h2><button >Delete</button></div>
+  <div [class.name]="!isAddMode">
+    <h2 *ngIf="isAddMode">Add Category</h2>
+    <h2 *ngIf="!isAddMode" >Edit/Delete Category</h2>
+    <button *ngIf="!isAddMode" (click)="deleteThisCategory()" class="delete-button">Delete</button>
+  </div>
     <input  [(ngModel)]="categoryName" placeholder="Category Name" [value]="name" >
     <!-- Другие поля и кнопки для выбора иконок и действий -->
   <div class="select-icon">
@@ -9,8 +13,8 @@
       </div>
   </div>
     <div class="modal-actions">
-      <button *ngIf="isAddMode" (click)="addCategoryS()">Add</button>
-      <button *ngIf="!isAddMode" (click)="editCategory()">Edit</button>
+      <button class="active-button" *ngIf="isAddMode" (click)="addCategoryS()">Add</button>
+      <button class="active-button" *ngIf="!isAddMode" (click)="editCategory()">Edit</button>
       <button (click)="onCloseModal()">Cancel</button>
     </div>
   </div>

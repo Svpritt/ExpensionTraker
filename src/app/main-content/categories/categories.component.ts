@@ -3,7 +3,8 @@ import { ExpenseCategoryService} from 'src/app/services/expense-category.service
 import { IncomeCategoryService } from 'src/app/services/income-category.service';
 import { Category } from 'src/app/Backend/backend-module/services/category.service'
 import { Observable } from 'rxjs';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -24,10 +25,16 @@ export class CategoriesComponent {
   currentCategory!: Category ;
   expenseCategories: Category[] = [];
   incomeCategories: Category[] = [];
+  private unsubscribe$ = new Subject<void>();
+
   constructor(private expenseCategoryService: ExpenseCategoryService, private incomeCategoryService: IncomeCategoryService) { }
   
     ngOnInit() {
       this.loadCategories();
+    }
+    ngOnDestroy() {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
     }
     private loadCategories() {
       this.expenseCategoryService.getCategories().subscribe((categories: Category[]) => {
@@ -61,6 +68,9 @@ export class CategoriesComponent {
     this.isEditCategoryOpen = false;
     this.selectedCategory = undefined!; // поскольку до компиляции у меня всегда может быть 2 типа данных expense income
     // а после компиляции без вызова кода стандартное значение это undefind то и при сбросе я принудительно ставлю его же
+    this.unsubscribe$.next();
+    this.loadCategories();
+
   }
   selectCategory(category: Category , categoryType: 'expense' | 'income'): void {
     this.selectedCategory = category;

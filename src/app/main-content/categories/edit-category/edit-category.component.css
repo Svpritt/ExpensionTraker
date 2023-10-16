@@ -1,51 +1,52 @@
 /* modal.component.css */
 .modal {
-    padding: 10px;
-    width: 460px;
-    max-width: 600px;
-    min-width: 300px;
-    height: 780px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: white;
+  padding: 10px;
+  min-width: 300px;
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
-.name{
-    display: flex;
-    justify-content: space-between;
+.name {
+  display: flex;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
 .select-icon {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    overflow-x: auto;
-    height: 200px;
-    width: 300px;
-    padding: 10px;
-    border: 3px solid #282828;
-    justify-content: center;
-    margin: 10px auto;
-  }
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+  border: 3px solid #282828;
+  justify-content: center;
+  margin: 10px auto;
+}
   
   h2 {
     text-align: center;
+    margin: 0;
+    padding: 5px;
   }
   
   input {
     height: 30px;
     width: 200px;
-    background-color: #7cff9d;
-    border: none;
+    border-radius: 5px;
     padding: 0 10px;
     display: block;
-    margin: 10px auto; /* Центрируем по горизонтали */
+    margin: 10px auto;
   }
   
   button {
-    background-color: #7cff9d;
-    color: #282828;
-    border: none;
+    border-radius: 5px;
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
@@ -55,18 +56,15 @@
     background-color: #ff6b6b;
   }
   
+  
   .modal-actions {
     display: flex;
-    justify-content: center;
     justify-content: space-around;
   }
+  
   .icon-item {
     width: 65px;
     height: 65px;
-    background-color: #3b27274b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -75,8 +73,19 @@
     width: 50px;
     height: 50px;
   }
+  
   .selected {
-    /* Стили для выбранного элемента */
-    background-color: #333; /* Пример темного фона */
-    color: #fff; /* Пример белого текста */
+    background-color: #333;
+    color: #fff;
+  }
+  .active-button{
+    background-color: #333;
+    color: #fff;
+
+  }
+  .delete-button {
+    background-color: #ff6b6b;
+    max-height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
   }

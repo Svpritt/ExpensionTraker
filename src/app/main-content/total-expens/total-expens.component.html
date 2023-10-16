@@ -3,9 +3,9 @@
       <div class="dashboard">
         <div class="main-circle-content">
           <div class="month-switch">
-            <button (click)="switchMonth(-1)">Назад</button>             <!--  -->
+            <button (click)="switchMonth(-1)">Next</button>             <!--  -->
             <span> {{ currentMounth }}</span>   <!--   -->
-            <button (click)="switchMonth(1)">Вперед</button> <!-- (click)="switchMonth(1)"-->
+            <button (click)="switchMonth(1)">Before</button> <!-- (click)="switchMonth(1)"-->
           </div>
           <div class="category-container">
             <div class="category-grid" >
@@ -16,16 +16,19 @@
             <div class="big-item"><div class="big-item-inside">Reserved Item</div></div>
           </div>
           <div class="balance">
-            <button class="balance-button">Текущий баланс: {{balance}}</button>
+            <button class="balance-button">Reserved = balance {{balance}}</button>
           </div>
           <div class="buttons">
             <!-- Кнопки расхода и дохода -->
-            <button class="expense-button" (click)="openModal('expense')">Расход</button>
-            <button class="income-button" (click)="openModal('income')">Доход</button>
+            <button class="expense-button" (click)="openModal('expense')">Expense</button>
+            <button class="income-button" (click)="openModal('income')">Income</button>
           </div>
         </div>
       </div>
-      <app-expenses *ngIf="isModalOpen" [categoryType]="categoryType" (closeModalEvent)="closeModal()" [parentComponent]="this"></app-expenses>
+      <app-expenses *ngIf="modalExpenseService.isModalOpen$ | async" [categoryType]="categoryType" [totalExpens]="this"></app-expenses>
+      
+    </div>
+
     </div>
 <!-- [parentComponent]="this" -->
 <!-- ((item.amount / totalAmount) * 100).toFixed(2) -->

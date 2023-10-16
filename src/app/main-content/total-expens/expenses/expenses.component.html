@@ -7,7 +7,7 @@
 
 <div class="expenses-container" >
     <div class="expenses-header">
-      <h2>Add Expense</h2>
+      <h2>Add Expense {{categoryType}}</h2>
       <button class="close-button" (click)="closeModal()">X</button>
     </div>
     <div class="expenses-form">
@@ -22,7 +22,8 @@
 
       <div class="button-container">
         <button class="cancel-button" (click)="closeModal()">Cancel</button>
-        <button class="add-button" (click)="sendDataToServer()">Add Expense</button>
+        <button class="add-button" *ngIf="categoryType === 'expense'"  (click)="sendDataToServer()">Add Expense</button>
+        <button class="add-button" *ngIf="categoryType === 'income'" (click)="sendDataToServer()">Add Income</button>
     </div>
     </div>
   </div>

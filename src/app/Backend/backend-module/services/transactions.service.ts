@@ -21,9 +21,17 @@ export class TransactionsService {
   getTransactionsForMonth(year: number, month: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.serverUrl}/income-transaction/transactions-for-month?year=${year}&month=${month}`);
   }
+  updateTransaction(id: number, transactionData: any): Observable<any> {
+    return this.http.patch(`${this.serverUrl}/income-transaction/${id}`, transactionData);
+  }
+
+  deleteTransaction(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.serverUrl}/income-transaction/${id}`);
+  }
 }
 
 
-//сделать сложный обзервабл в гете, который будет дергаться по команде.
-//когда отрабатывается create дать команду для get чтоб он заново зарезервил данные.
-//событие
+// тут потрібно зробити складний Observable але я роблю бек для ознайомлення з ним і поки що не вмію цього робити, але потім я вивчу це і зроблю.
+//я гадаю мені потрібно зробити так щоб мій createTransaction робив якийсь стейт і давав про це знати для getTransactionsForMounth 
+//  тоді при пуші нової транзакціі у меня обновляться данні з підписки
+// зараз я це роблю через підписки і відписки та виклкикаю методи знову при змінах де я це зазначив

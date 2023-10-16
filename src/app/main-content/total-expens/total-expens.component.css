@@ -5,6 +5,7 @@
     height: 100%;
     max-width: 1400px;
     position: relative;
+    flex-direction: column;
   }
   
   .dashboard {
@@ -19,16 +20,12 @@
   .category-item-img{
     height: 30px;
     width: 30px;
-    
   }
-  
   .category-grid {
     display: grid;
 
   }
-  
   .category-item {
-  
     border-radius: 50%;
     width: 75px;
     height: 75px;
@@ -107,10 +104,10 @@
     position: relative;
   }
   .income-button {
-    background-color: #57cb70;
+    background-color: #008000;
   }
   .expense-button{
-    background-color: #f26363;
+    background-color: #ff6b6b;
   }
 
   /* Создание псевдоэлемента ::before для затемнения фона */
@@ -135,10 +132,24 @@
 .balance-button:hover::before {
   opacity: 1;
 }
-.month-switch{
-  text-align: center  ;
+.month-switch {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+.month-switch > button:hover {
+  background-color: #444;
+}
+.month-switch > button {
+  padding: 10px 15px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.month-switch > button.active {
+  background-color: #333;
+  color: #fff;
 }
 [unselectable=on] {      /* специальный маркер что бы не было выделений текста в барузере и целом чего угодно внутри элемента, при этом он остается кликабельным */
   -moz-user-select: none;
@@ -153,8 +164,12 @@
   .dashboard{
     margin: 0;
   }
+  .big-item-inside {
+  width: 230px;
+  height: 230px;
+  }
   .category-item{
 
-    margin: 15px;
+    margin: 14px;
   }
 }

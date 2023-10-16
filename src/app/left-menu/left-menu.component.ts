@@ -14,7 +14,7 @@ export class LeftMenuComponent {
     'Recent Transactions',
     'Total Expense',
     'Categories',
-    
+    'chart'
   ];
   @Input() isMobileMenuOpen: boolean = false;
   constructor(private mobileMenuService: MobileMenuService) {

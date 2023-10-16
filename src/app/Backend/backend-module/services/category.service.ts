@@ -22,16 +22,13 @@ export class CategoryService {
     return this.http.patch(`${this.serverUrl}/categories/${id}`, categoryData);
   }
   getExpenseCategories(): Observable<any[]> {
-    // Используйте HTTP-запрос для получения категорий из бекенда
     return this.http.get<any[]>(`${this.serverUrl}/categories/expense`);
   }
   getIncomeCategories(): Observable<any[]> {
-    // Используйте HTTP-запрос для получения категорий из бекенда
     return this.http.get<any[]>(`${this.serverUrl}/categories/income`);
   }
 }
 export interface Category {
-[x: string]: any;
   id?: number;
   name: string;
   icon: string;

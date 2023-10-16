@@ -1,10 +1,7 @@
 
 .category-managment {
     padding: 10px;
-    width: 460px;
-    max-width: 600px;
     min-width: 300px;
-    height: 780px;
     margin-left: 200px;
     position: relative;
 }
@@ -13,7 +10,6 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow-x: auto;
-    height: 350px;
   }
   .category-item-img{
     height: 30px;
@@ -59,11 +55,11 @@
 }
 
 .add-category{
-  background-color: #7cff9d;
-  color: #282828;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   cursor: pointer;
   position: relative;
 }
@@ -76,4 +72,16 @@
   .category-managment{
     margin: 0;
   }
+  .categories-list {
+    height: 250px;
+  }
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
 }

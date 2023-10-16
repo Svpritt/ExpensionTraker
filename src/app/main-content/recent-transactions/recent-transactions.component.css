@@ -1,84 +1,263 @@
-.main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-width: 1400px;
-    position: relative;
-  }
-  
-  .dashboard {
-    margin-right: auto;
-    margin-left: 200px;
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .search-button {
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .list-container {
-    margin: 5px;
+/* Общие стили */
 
-    margin-top: 20px;
-    width: 450px;
-  }
+.main-container {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #f5f5f5;
+  margin-left: 200px;
+}
+
+
+/* Дашборд */
+
+.dashboard {
+  margin-top: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.month-switch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.month-switch > button {
+  padding: 10px 15px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.month-switch > button.active {
+  background-color: #333;
+  color: #fff;
+}
+.month-switch > button:hover {
+  background-color: #444;
+}
+.find {
+  margin-top: 0;
+  display: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-button {
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Список транзакций */
+
+.list-container {
+  margin-top: 0;
+  padding: 0;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  gap: 5px;
+  width: 125px;
+}
+
+.transaction-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.transaction-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.transaction-description {
+  margin-top: 5px;
+  color: #999;
+  flex: auto;
+  margin-left: auto;
+}
+
+.transaction-amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 5px;
+}
+
+.transaction-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.transaction-actions > button {
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.transaction-actions > button:hover {
+  background-color: #444;
+}
+
+/* Редактирование транзакций */
+
+.transaction-details.editing {
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0;
+}
+
+.transaction-title.editing,
+.transaction-date.editing,
+.transaction-description.editing,
+.transaction-amount.editing {
+  width: 50%;
+}
+
+.transaction-description-editing {
+  /* flex-wrap: nowrap;
+  max-width: none;
+  margin-bottom: 0;
+  width: max-content;
+  white-space: pre-wrap; */
+  overflow: auto;
+  width: 90%;
+    word-wrap: break-word;
+    margin-left: 5px;
+}
+
+.edit-group {
+  /* Выделение группы */
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.group-one,
+.group-two {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.group-two {
+  margin-right: 5px;
   
-  .list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+}
+.transaction-title.editing,
+.transaction-date.editing {
+  /* Прижать к левой стороне */
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.transaction-amount.editing {
+  /* Прижать вправо к кнопкам */
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.transaction-amount.editing + .group-two {
+  /* Над Amount надпись "Сумма" */
+  margin-top: 5px;
+  text-align: center;
+}
+
+.transaction-amount.editing + .group-two > .transaction-amount-edit {
+  margin-top: 0;
+}
+
+.transaction-amount.editing + .group-two > .transaction-amount-edit + .fa-money {
+  margin-top: 5px;
+}
+
+
+/* Дополнительные стили */
+.Red {
+  /* Стили для элементов с классом list-item и классом Red */
+color: #ff6b6b;  /* Другие стили */
+}
+
+.Green {
+  /* Стили для элементов с классом list-item и классом Green */
+color: green;  /* Другие стили */
+}
+.list-container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-title:hover {
+  color: #333;
+}
+
+.transaction-date:hover {
+  color: #333;
+}
+
+.transaction-description:hover {
+  color: #333;
+}
+
+.transaction-amount:hover {
+  color: #333;
+}
+
+.add-transaction {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-transaction:hover {
+  background-color: #444;
+}
+@media (max-width: 768px) {
+  .main-container {
+    margin-left: 0px;
   }
-  
-  .transaction-details {
-    display: flex;
+  .transaction-actions > button{
+    padding: 4px;
+    height: 35px;
+    margin: auto;
+  }
+  .edit-group
+  {
     flex-direction: column;
   }
-  
-  .transaction-title {
-    font-weight: bold;
-  }
-  
-  .transaction-description {
-    color: #777;
-  }
-  
-  .transaction-amount {
-    text-align: right;
-  }
-  
-  .transaction-date {
-    font-weight: bold;
-    color: #777;
-  }
-  
-  /* Дополнительные стили по желанию */
-  
-  .find {
-    display: flex;
-    margin: 5px;
-  }
-
-  .month-switch{
-    text-align: center  ;
-    display: flex;
-    justify-content: space-evenly;
-  }
-  /* Дополнительные стили для индикатора типа категории (Тип) */
-  
+}

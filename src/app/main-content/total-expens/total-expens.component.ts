@@ -1,10 +1,10 @@
 import { Component, Input, } from '@angular/core';
 import { DateService } from 'src/app/services/date.service';
 import { ExpenseCategoryService } from 'src/app/services/expense-category.service';
-import { IncomeCategoryService } from 'src/app/services/income-category.service';
 import { Category } from 'src/app/Backend/backend-module/services/category.service';
 import { TransactionsService } from 'src/app/Backend/backend-module/services/transactions.service';
 import { Subscription } from 'rxjs';
+import { ModalExpenseService } from 'src/app/services/modal-expense.service';
 
 @Component({
   selector: 'app-total-expens',
@@ -35,6 +35,7 @@ export class TotalExpensComponent {
   ngOnInit(): void {
     this.loadCategories();
     this.loadTransactionsForCurrentMonth();
+    
   }
   ngDoCheck(): void {
     this.updateBalance();
@@ -42,8 +43,8 @@ export class TotalExpensComponent {
   constructor(
     private dateService: DateService,
     private expenseCategoryService: ExpenseCategoryService,
-    private incomeCategoryService: IncomeCategoryService,
-    private TransactionsService: TransactionsService
+    private TransactionsService: TransactionsService,
+    public modalExpenseService: ModalExpenseService
         ){}
 
     private loadCategories() {
@@ -56,16 +57,12 @@ export class TotalExpensComponent {
     onDataUpdated() {
       console.log('111')
       this.unsubscribeFromSubscriptions();
-
-      this.resetExpenseCategories(this.expenseCategories);
       this.loadTransactionsForCurrentMonth();
     }
 
     
     switchMonth(offset: number): void {
       // Измените текущую дату на заданный месяц offset месяцев назад или вперед
-      // this.expenseCategories = this.resetExpenseCategories(this.expenseCategories);
-
       this.currentDate.setMonth(this.currentDate.getMonth() + offset);
       this.loadTransactionsForCurrentMonth();
     }
@@ -73,43 +70,30 @@ export class TotalExpensComponent {
     private loadTransactionsForCurrentMonth(): void {
       const year = this.currentDate.getFullYear();
       const month = this.currentDate.getMonth() +1; // Добавляем 1, так как месяцы начинаются с 0
-      // this.expenseCategories = this.resetExpenseCategories(this.expenseCategories);
 
       this.TransactionsService.getTransactionsForMonth(year, month).subscribe((data) => {
         this.transactions = data;
         this.currentMounth = this.getCurrentMonthFormatted();
-        console.log(this.transactions)
-
         this.expenseCategories = this.aggregateAndUpdateCategories(this.transactions, this.expenseCategories);
         this.totalAmount = this.calculateTotalAmount(this.expenseCategories); // загальний тотал для обрахування выдсотків
       });
     }
-    private resetExpenseCategories(expenseCategories: Category[]): Category[] {
-      return expenseCategories.map((category) => ({
-        ...category,
-        amount: 0
-      }));
-    }
+
     calculateTotalAmount(categories: Category[]): number {
       return categories.reduce((total, category) => total + category.amount, 0);
     }
     private getCurrentMonthFormatted(): string {
       const options: Intl.DateTimeFormatOptions = { month: 'long' };
       console.log(this.currentDate)
-
       return this.currentDate.toLocaleDateString('en-US', options); 
     }
     openModal(categoryType: 'expense' | 'income') {
-      this.isModalOpen = true;
+      this.modalExpenseService.openModal(); // Вызов метода открытия модального окна
       this.categoryType = categoryType; // Установка categoryType при открытии модального окна
     }
-  closeModal(){
-    this.isModalOpen = false;
-  }
- 
+
   private aggregateAndUpdateCategories(transactions: any[], expenseCategories: Category[]): Category[] {
     const aggregatedData: any[] = [];
-  
     // Инициализируем все категории с amount равным 0
     expenseCategories.forEach((category) => {
       category.amount = 0;
@@ -137,7 +121,9 @@ export class TotalExpensComponent {
   
     return expenseCategories;
   }
+
   
+}
   // updateExpenseCategoriesWithTransactions(transactions: any[], expenseCategories: any[]): any[] {
   //   transactions.forEach((transaction) => {
   //     const matchingCategory = expenseCategories.find((category) => category.name === transaction.name);
@@ -148,6 +134,12 @@ export class TotalExpensComponent {
   //   console.log(expenseCategories)
   //   return expenseCategories; 
   // }
-}
 
 
+
+  // private resetExpenseCategories(expenseCategories: Category[]): Category[] {
+  //   return expenseCategories.map((category) => ({
+  //     ...category,
+  //     amount: 0
+  //   }));
+  // }

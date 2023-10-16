@@ -18,6 +18,8 @@ import { EditCategoryComponent } from './main-content/categories/edit-category/e
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartDisplayComponent } from './main-content/chart/chart-display/chart-display.component';
+import { ChartHoverComponent } from './main-content/chart/chart-hover/chart-hover.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainContentComponent,
     CategoriesComponent,
     EditCategoryComponent,
+    ChartDisplayComponent,
+    ChartHoverComponent,
     
     
   ],
